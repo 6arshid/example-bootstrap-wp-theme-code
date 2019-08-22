@@ -11,11 +11,9 @@
         <?php bloginfo('name'); ?>
     </title>
     <meta name="generator" content="WordPress <?php bloginfo('version'); ?>" />
-    <!-- leave this for stats -->
-    <link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/vendor/bootstrap/css/bootstrap.min.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/css/blog-home.css" type="text/css" media="screen, projection">
-    <script type="text/javascript" src="<?php bloginfo('stylesheet_directory'); ?>/vendor/script.js">
-    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
     <?php wp_head(); ?>
