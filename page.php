@@ -1,41 +1,13 @@
 <?php get_header(); ?>
-<!-- Page Content -->
-<div class="container">
-    <div class="row">
-        <!-- Blog Entries Column -->
-        <div class="col-md-9">
-            <h1 class="my-4">
-                <?php bloginfo('description'); ?>
-            </h1>
-            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                <!-- Blog Post -->
-                <div class="card mb-4">
-                    <?php  if ( has_post_thumbnail() ) {
-                        the_post_thumbnail(array(800, 400, true), array('class' => ' card-img-top')); // add post thumbnail
-                    }
-                    ?>
-                    <div class="card-body">
-                        <a href="<?php the_permalink() ?>" >
-                            <h2 class="card-title">
-                                <?php the_title(); ?>
-                            </h2>
-                        </a>
-                        <p class="card-text">
-                            <?php the_content();?>
-                        </p>
+<main class="<?php echo get_theme_mod( 'page_width' ); ?> mt-<?php echo get_theme_mod( 'page_margin_top' ); ?> mb-<?php echo get_theme_mod( 'page_margin_bottom' ); ?>">
 
-                    </div>
-                    <div class="card-footer text-muted">
-                        Posted on
-                        <?php the_time('F j, Y'); ?> by
-                        <?php if(get_the_author() != "adam"): ?>, by
-                            <span class="post-author">
-                <?php the_author_posts_link() ?>
-              </span>
-                        <?php endif; ?>
-                    </div>
-                    <?php comments_template(); ?>
-                </div>
+    <div class="row">
+        <div class="col-md-12">
+            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <article class="blog-post">
+                <?php the_content();?>
+                            </article>
+
             <?php endwhile; else: ?>
                 <div class="no-results">
                     <p>
@@ -52,15 +24,12 @@
             <?php endif; ?>
             <!-- Pagination -->
 
-        </div>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-3">
-            <?php if ( is_active_sidebar( 'main-sidebar' ) ) { ?>
-                <?php dynamic_sidebar('main-sidebar'); ?>
-            <?php } ?>
+            <nav class="blog-pagination" aria-label="Pagination">
+                <?php previous_posts_link('&laquo; Previous Entries') ?>
+                <?php next_posts_link('Next Entries &raquo;','') ?>
+            </nav>
+
         </div>
     </div>
-    <!-- /.row -->
-</div>
-<!-- /.container -->
+</main>
 <?php get_footer(); ?>

@@ -1,42 +1,27 @@
 <?php get_header(); ?>
-<!-- Page Content -->
-<div class="container">
-    <div class="row">
-        <!-- Blog Entries Column -->
-        <div class="col-md-9">
-            <h1 class="my-4">
-                <?php bloginfo('description'); ?>
-            </h1>
-            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-                <!-- Blog Post -->
-                <div class="card mb-4">
-                    <?php  if ( has_post_thumbnail() ) {
-                        the_post_thumbnail(array(800, 400, true), array('class' => ' card-img-top')); // add post thumbnail
-                    }
-                    ?>
-                    <div class="card-body">
-                        <a href="<?php the_permalink() ?>" >
-                            <h2 class="card-title">
-                                <?php the_title(); ?>
-                            </h2>
-                        </a>
-                        <p class="card-text">
-                            <?php the_content();?>
-                        </p>
+<main class="<?php echo get_theme_mod( 'single_width' ); ?> mt-<?php echo get_theme_mod( 'main_margin_top' ); ?> mb-<?php echo get_theme_mod( 'main_margin_bottom' ); ?>">
 
-                    </div>
-                    <div class="card-footer text-muted">
-                        Posted on
-                        <?php the_time('F j, Y'); ?> by
-                        <?php if(get_the_author() != "adam"): ?>, by
-                            <span class="post-author">
+    <div class="row g-5 mt-3">
+        <div class="col-md-8">
+            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <article class="blog-post">
+                <h2 class="blog-post-title"> <a href="<?php the_permalink() ?>" ><?php the_title(); ?></a></h2>
+                <p class="blog-post-meta">   <?php the_time('F j, Y'); ?> by    <?php if(get_the_author() != "adam"): ?>, by
+
                 <?php the_author_posts_link() ?>
-              </span>
-                        <?php endif; ?>
-                    </div>
-                    <?php comments_template(); ?>
-                </div>
+
+                    <?php endif; ?></p>
+                <hr>
+                <?php  if ( has_post_thumbnail() ) {
+                    the_post_thumbnail(array(800, 400, true), array('class' => ' card-img-top')); // add post thumbnail
+                }
+                ?>
+                <?php the_content();?>
+                            </article>
+
             <?php endwhile; else: ?>
+                <?php comments_template(); ?>
+
                 <div class="no-results">
                     <p>
                         <strong>There has been an error.
@@ -51,25 +36,28 @@
                 <!--noResults-->
             <?php endif; ?>
             <!-- Pagination -->
-            <ul class="pagination justify-content-center mb-4">
-                <div class="navigation">
-                    <div class="alignleft">
-                        <?php previous_posts_link('&laquo; Previous Entries') ?>
-                    </div>
-                    <div class="alignright">
-                        <?php next_posts_link('Next Entries &raquo;','') ?>
-                    </div>
-                </div>
-            </ul>
+
+            <nav class="blog-pagination" aria-label="Pagination">
+                <?php previous_posts_link('&laquo; Previous Entries') ?>
+                <?php next_posts_link('Next Entries &raquo;','') ?>
+            </nav>
+
         </div>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-3">
-            <?php if ( is_active_sidebar( 'main-sidebar' ) ) { ?>
-                <?php dynamic_sidebar('main-sidebar'); ?>
-            <?php } ?>
+
+        <div class="col-md-4">
+            <div class="position-sticky" style="top: 2rem;">
+                <?php if ( is_active_sidebar( 'home_right_1' ) ) : ?>
+                    <?php dynamic_sidebar( 'home_right_1' ); ?>
+                <?php endif; ?>
+
+
+
+
+            </div>
         </div>
     </div>
-    <!-- /.row -->
-</div>
-<!-- /.container -->
+
+
+
+</main>
 <?php get_footer(); ?>
