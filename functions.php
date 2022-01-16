@@ -413,3 +413,114 @@ function twentytwentyone_child_register_required_plugins() {
     tgmpa( $plugins, $config );
 }
 
+
+function ocdi_import_files()
+{
+    return array(
+        array(
+            'import_file_name' => 'CAR SHOWPLACE',
+            'categories' => array('Business', 'Business'),
+            'import_file_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/carshowplace.xml',
+            'import_preview_image_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/car-showplace.jpg',
+            'import_notice' => __('After you import this demo, you will have to setup the slider separately.', 'your-textdomain'),
+            'preview_url' => 'https://danskesite.com/car-showplace/',
+
+        ),
+        array(
+            'import_file_name' => 'Steak House',
+            'categories' => array('Business', 'Business'),
+            'import_file_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/steakhouse.xml',
+            'import_preview_image_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/steakhouse.jpg',
+            'import_notice' => __('After you import this demo, you will have to setup the slider separately.', 'your-textdomain'),
+            'preview_url' => 'http://www.danskesite.com/steakhouse/',
+        ),
+        array(
+            'import_file_name' => 'LEARN DIGITAL MARKETING',
+            'categories' => array('Business', 'Business'),
+            'import_file_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/learndigitalmarketing.xml',
+            'import_preview_image_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/learndigitalmarketing.jpg',
+            'import_notice' => __('After you import this demo, you will have to setup the slider separately.', 'your-textdomain'),
+            'preview_url' => 'https://danskesite.com/learn-digital-marketing/',
+        ),
+        array(
+            'import_file_name' => 'BRAND STORE',
+            'categories' => array('Business', 'Shop'),
+            'import_file_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/brandstore.xml',
+            'import_preview_image_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/brandstore.jpg',
+            'import_notice' => __('After you import this demo, you will have to setup the slider separately.', 'your-textdomain'),
+            'preview_url' => 'https://danskesite.com/brandstore/',
+        ),
+
+        array(
+            'import_file_name' => 'Hair Dresser',
+            'categories' => array('Business', 'Shop'),
+            'import_file_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/hairdresser.xml',
+            'import_preview_image_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/hairdresser.jpg',
+            'import_notice' => __('After you import this demo, you will have to setup the slider separately.', 'your-textdomain'),
+            'preview_url' => 'https://danskesite.com/hairdresser/',
+        ),
+
+        array(
+            'import_file_name' => 'Makeup Artist',
+            'categories' => array('Business', 'Shop'),
+            'import_file_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/makeup-artist.xml',
+            'import_preview_image_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/makeup-artist.jpg',
+            'import_notice' => __('After you import this demo, you will have to setup the slider separately.', 'your-textdomain'),
+            'preview_url' => 'https://danskesite.com/makeup-artist/',
+        ),
+
+        array(
+            'import_file_name' => 'Lawyer',
+            'categories' => array('Business', 'Shop'),
+            'import_file_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/lawyer.xml',
+            'import_preview_image_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/lawyer.jpg',
+            'import_notice' => __('After you import this demo, you will have to setup the slider separately.', 'your-textdomain'),
+            'preview_url' => 'https://danskesite.com/lawyer/',
+        ),
+         array(
+            'import_file_name' => 'Coach',
+            'categories' => array('Business', 'Shop'),
+            'import_file_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/coach.xml',
+            'import_preview_image_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/coach.jpg',
+            'import_notice' => __('After you import this demo, you will have to setup the slider separately.', 'your-textdomain'),
+            'preview_url' => 'https://danskesite.com/coach/',
+        ),
+        array(
+            'import_file_name' => 'BBQ Restaurant',
+            'categories' => array('Business', 'Shop'),
+            'import_file_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/bbq-restaurant.xml',
+            'import_preview_image_url' => 'https://danskesite.com/wp-content/themes/danskesite/demo/bbq-restaurant.jpg',
+            'import_notice' => __('After you import this demo, you will have to setup the slider separately.', 'your-textdomain'),
+            'preview_url' => 'https://danskesite.com/bbq-restaurant/',
+        ),
+
+
+
+    );
+}
+
+add_filter('pt-ocdi/import_files', 'ocdi_import_files');
+
+
+
+function ocdi_after_import( $selected_import ) {
+	echo "This will be displayed on all after imports!";
+  //Set Menu
+  $top_menu = get_term_by('name', 'Primary menu', 'nav_menu');
+  $mobile_menu = get_term_by('name', 'Secondary menu', 'nav_menu');
+  set_theme_mod( 'nav_menu_locations' , array( 
+        'primary' => $top_menu->term_id, 
+        'secondary' => $mobile_menu->term_id 
+       ) 
+  );
+	
+ $front_page_id = get_page_by_title('Home');
+    $blog_page_id = get_page_by_title('Blog');
+
+    update_option('show_on_front', 'page');
+    update_option('page_on_front', $front_page_id->ID);
+    update_option('page_for_posts', $blog_page_id->ID);
+ 
+	
+}
+add_action( 'ocdi/after_import', 'ocdi_after_import' );
