@@ -5,4 +5,4 @@ Template for Bootstrap 5 + customize_register sample <br>
 With the code install additional plugins <br>
 With install sample demo
 .
-<a href="http://farshid.dk">farshid.dk</a><br><a href="https://mrlast.com/">Mr last</a>
+<a href="http://farshid.dk">farshid.dk</a>
